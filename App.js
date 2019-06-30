@@ -1,19 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, StatusBar } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './src/redux/reducers/index';
+import TabContainer from './src/components/TabContainer';
+import { Constants } from 'expo';
+import { blue, gray } from './src/utils/colors'
+import { setLocalNotification } from './src/utils/helpers';
 
-export default function App() {
+function StatusBar2 ({backgroundColor, ...props}) {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
     </View>
-  );
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+  render() {
+    return (
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <StatusBar2 backgroundColor={gray} barStyle='light-content'/>
+          <TabContainer/>
+        </View>
+      </Provider>
+    );
+  }
+}
+
+export default App;
