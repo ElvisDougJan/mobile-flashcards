@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { getDecks } from '../utils/fakeApi';
 import { receiveDecks } from '../redux/actions/index';
 import DeckItem from './DeckItem';
-import { black } from "../utils/colors";
+import { grey_darken_1 } from "../utils/colors";
 
 class DeckList extends Component {
 
@@ -27,7 +27,7 @@ class DeckList extends Component {
 				<View style={styles.header}>
 					<Text style={styles.textHeader}>
 						Your Decks
-                    </Text>
+					</Text>
 					<View style={styles.list}>
 						{decks.map((deck) => <DeckItem key={deck.title} title={deck.title} />)}
 					</View>
@@ -50,8 +50,9 @@ const styles = StyleSheet.create({
 		marginTop: 30,
 	},
 	textHeader: {
-		fontSize: 32,
-		color: black,
+		fontSize: 20,
+		fontStyle: 'italic',
+		color: grey_darken_1,
 		textAlign: 'center',
 	},
 })

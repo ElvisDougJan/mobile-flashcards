@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { black, blue, white } from "../utils/colors";
-import TextButton from './TextButton';
+import { black, blue, white, grey_darken_1, deep_orange_lighten_1, green_darken_1 } from "../utils/colors";
 import { removeDeck } from '../redux/actions/index';
 import { removeDeckStorage } from '../utils/fakeApi';
 
@@ -42,12 +41,12 @@ class Deck extends Component {
         </View>
         <View style={styles.actions}>
           <TouchableOpacity
-            style={styles.primaryBtn}
+            style={styles.buttons}
             onPress={this.startQuiz}>
             <Text style={styles.primaryBtnText}>Start Quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.secondaryBtn}
+            style={styles.buttons}
             onPress={() => navigation.navigate(
               'NewCard',
               { deck }
@@ -55,9 +54,9 @@ class Deck extends Component {
             <Text style={styles.secondaryBtnText}>Add Card</Text>
           </TouchableOpacity>
         </View>
-        <TextButton
-          onPress={this.handleDelete}>Delete Deck
-                </TextButton>
+        <TouchableOpacity style={styles.buttons} onPress={this.handleDelete}>
+          <Text style={styles.buttomText}>Delete Deck</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -71,15 +70,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   title: {
+    fontStyle: 'italic',
     marginTop: 10,
-    fontSize: 32,
+    fontSize: 22,
     color: black,
     textAlign: 'center'
   },
   cardCount: {
-    marginTop: 15,
-    fontSize: 20,
-    color: '#999',
+    marginTop: 12,
+    fontSize: 16,
+    color: grey_darken_1,
     textAlign: 'center'
   },
   actions: {
@@ -104,13 +104,34 @@ const styles = StyleSheet.create({
   },
   primaryBtnText: {
     fontSize: 18,
-    color: white,
+    color: blue,
     textAlign: 'center',
   },
   secondaryBtnText: {
     fontSize: 18,
-    color: blue,
+    color: green_darken_1,
     textAlign: 'center',
+  },
+  buttons: {
+    backgroundColor: white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 10,
+      height: 2,
+    },
+    shadowRadius: 3.84,
+    elevation: 15,
+    shadowOpacity: 0.5,
+    borderRadius: 6,
+    padding: 15,
+    marginTop: 40,
+    width: 220,
+    alignSelf: 'center'
+  },
+  buttomText: {
+    fontSize: 18,
+    color: deep_orange_lighten_1,
+    textAlign: 'center'
   }
 })
 

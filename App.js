@@ -3,7 +3,7 @@ import { View, StatusBar } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './src/redux/reducers/index';
-import TabContainer from './src/components/TabContainer';
+import TabIndex from './src/utils/tabIndex';
 import { Constants } from 'expo';
 import { blue, gray } from './src/utils/colors'
 import { setLocalNotification } from './src/utils/helpers';
@@ -25,7 +25,7 @@ class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <StatusBar2 backgroundColor={gray} barStyle='light-content'/>
-          <TabContainer/>
+          <TabIndex/>
         </View>
       </Provider>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { black, blue } from "../utils/colors";
+import { black, blue, white, amber_darken_3, grey_darken_1 } from "../utils/colors";
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 
@@ -26,24 +26,28 @@ class DeckItem extends Component {
 
 const styles = StyleSheet.create({
   deck: {
-    flex: 1,
     justifyContent: 'center',
+    flex: 1,
     alignItems: 'center',
-    backgroundColor: '#efefef',
-    color: black,
+    backgroundColor: white,
+    color: amber_darken_3,
+    borderRadius: 20,
+    borderColor: amber_darken_3,
+    borderStyle: 'solid',
+    borderWidth: 1,
     marginTop: 10,
     marginBottom: 10,
     padding: 30,
     width: 300,
-    height: 80,
+    height: 30,
   },
   title: {
     fontSize: 20,
-    color: black,
+    color: amber_darken_3,
   },
   cardCount: {
     fontSize: 14,
-    color: black
+    color: grey_darken_1
   }
 })
 

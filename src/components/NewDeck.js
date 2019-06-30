@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { connect } from 'react-redux';
-import { black, gray, blue, white } from "../utils/colors";
+import { black, gray, blue, white, grey_darken_1, amber_darken_3 } from "../utils/colors";
 import { addDeck } from '../redux/actions/index';
 import { createDeck } from '../utils/fakeApi';
 
 class NewDeck extends Component {
 	state = {
-		text: null,
+		textInput: null,
 	}
 
 	handleSubmit = () => {
@@ -37,17 +37,19 @@ class NewDeck extends Component {
 		return (
 			<View style={styles.container}>
 				<View>
-					<Text style={styles.textHeader}>What is the title of your new deck?</Text>
+					<Text style={styles.textTitle}>
+						What is the title of your new deck?
+					</Text>
 				</View>
 				<View style={styles.form}>
 					<TextInput
 						style={styles.textInput}
 						placeholder='Deck Title'
-						onChangeText={(text) => this.setState({ text })}
+						onChangeText={textInput => this.setState({ textInput })}
 						value={this.state.title}
 					/>
-					<TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
-						<Text style={styles.textButton}>Create New Deck</Text>
+					<TouchableOpacity style={styles.buttonNewCard} onPress={this.handleSubmit}>
+						<Text style={styles.textButtonNewDeck}>Save New Deck</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -62,8 +64,9 @@ styles = StyleSheet.create({
 		marginTop: 20,
 		justifyContent: 'flex-start',
 	},
-	textHeader: {
-		fontSize: 32,
+	textTitle: {
+		fontSize: 20,
+		fontStyle: 'italic',
 		color: black,
 		textAlign: 'center',
 	},
@@ -77,18 +80,25 @@ styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		fontSize: 18
 	},
-	button: {
-		backgroundColor: blue,
-		borderRadius: 6,
-		padding: 15,
-		marginTop: 40,
-		width: 220,
-		alignSelf: 'center'
+	buttonNewCard: {
+		backgroundColor: white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 10,
+      height: 2,
+    },
+    shadowRadius: 3.84,
+    elevation: 15,
+    shadowOpacity: 0.5,
+    borderRadius: 6,
+    padding: 15,
+    marginTop: 40,
+    width: 220,
+    alignSelf: 'center'
 	},
-	textButton: {
-		fontSize: 18,
-		color: white,
+	textButtonNewDeck: {
 		textAlign: 'center',
+		color: amber_darken_3
 	}
 })
 

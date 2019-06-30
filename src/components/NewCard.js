@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import { black, gray, blue, white } from "../utils/colors";
+import { black, gray, white, amber_darken_3 } from "../utils/colors";
 import { connect } from 'react-redux';
 import { addNewCard } from '../redux/actions/index';
 import { addCardToDeck } from '../utils/fakeApi';
@@ -41,7 +41,7 @@ class NewCard extends Component {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.textHeader}>What is the content of your new card?</Text>
+          <Text style={styles.textTitle}>What is the content of your new card?</Text>
         </View>
         <View style={styles.form}>
           <TextInput
@@ -56,7 +56,7 @@ class NewCard extends Component {
             placeholder='Answer'
             onChangeText={(answerText) => this.setState({ answerText })}
           />
-          <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
+          <TouchableOpacity style={styles.buttonNewCard} onPress={this.handleSubmit}>
             <Text style={styles.textButton}>Create New Card</Text>
           </TouchableOpacity>
         </View>
@@ -72,7 +72,7 @@ styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'flex-start',
   },
-  textHeader: {
+  textTitle: {
     fontSize: 32,
     color: black,
     textAlign: 'center',
@@ -88,8 +88,16 @@ styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontSize: 18
   },
-  button: {
-    backgroundColor: blue,
+  buttonNewCard: {
+    backgroundColor: white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 10,
+      height: 2,
+    },
+    shadowRadius: 3.84,
+    elevation: 15,
+    shadowOpacity: 0.5,
     borderRadius: 6,
     padding: 15,
     marginTop: 40,
@@ -98,7 +106,7 @@ styles = StyleSheet.create({
   },
   textButton: {
     fontSize: 18,
-    color: white,
+    color: amber_darken_3,
     textAlign: 'center',
   }
 })
