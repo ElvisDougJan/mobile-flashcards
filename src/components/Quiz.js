@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { black, gray, blue, white } from "../utils/colors";
+import { black, gray, blue, white, amber_darken_3 } from "../utils/colors";
 import { connect } from 'react-redux';
-import TextButton from './TextButton';
 import {
   clearLocalNotification,
   setLocalNotification
@@ -81,8 +80,16 @@ class Quiz extends Component {
         </View>
         <View>
           {showAnswer === false
-            ? <TextButton onPress={this.flipCard}>Show Answer</TextButton>
-            : <TextButton onPress={this.flipCard}>Show Question</TextButton>
+            ? <TouchableOpacity onPress={this.flipCard}>
+              <Text style={styles.showButton}>
+                Show Answer
+              </Text>
+            </TouchableOpacity>
+            : <TouchableOpacity onPress={this.flipCard}>
+              <Text style={styles.showButton}>
+                Show Question
+              </Text>
+            </TouchableOpacity>
           }
         </View>
         <View style={styles.actions}>
@@ -174,6 +181,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: blue,
     textAlign: 'center'
+  },
+  showButton: {
+    textAlign: 'center',
+    color: amber_darken_3,
+    fontSize: 18,
+    marginTop: 30
   }
 })
 

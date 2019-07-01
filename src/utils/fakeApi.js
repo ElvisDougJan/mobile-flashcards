@@ -39,7 +39,7 @@ export function getDecks() {
     })
 }
 
-export function createDeck(title) {
+export function createNewDeck(title) {
   const newDeck = {
     title,
     questions: []

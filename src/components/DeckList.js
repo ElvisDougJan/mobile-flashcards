@@ -9,9 +9,7 @@ import { grey_darken_1 } from "../utils/colors";
 class DeckList extends Component {
 
 	componentDidMount() {
-
 		const { dispatch } = this.props;
-
 		getDecks()
 			.then((decks) => dispatch(receiveDecks(decks)))
 			.catch((error) => {
@@ -26,7 +24,7 @@ class DeckList extends Component {
 			<ScrollView style={styles.container}>
 				<View style={styles.header}>
 					<Text style={styles.textHeader}>
-						Your Decks
+						List of Decks
 					</Text>
 					<View style={styles.list}>
 						{decks.map((deck) => <DeckItem key={deck.title} title={deck.title} />)}
@@ -40,20 +38,21 @@ class DeckList extends Component {
 const styles = StyleSheet.create({
 	container: {
 		marginTop: 20,
-		padding: 20,
+		padding: 20
 	},
 	header: {
 		marginBottom: 20,
-		alignItems: 'center',
+		alignItems: 'center'
 	},
 	list: {
 		marginTop: 30,
+		marginBottom: 50
 	},
 	textHeader: {
 		fontSize: 20,
 		fontStyle: 'italic',
 		color: grey_darken_1,
-		textAlign: 'center',
+		textAlign: 'center'
 	},
 })
 

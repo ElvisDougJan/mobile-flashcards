@@ -37,7 +37,6 @@ class NewCard extends Component {
 
 
   render() {
-
     return (
       <View style={styles.container}>
         <View>
