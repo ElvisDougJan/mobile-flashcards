@@ -7,11 +7,13 @@ import { removeDeckStorage } from '../utils/fakeApi'
 
 class Deck extends Component {
 
-  handleDelete = () => {
-    const { deck, dispatch, navigation } = this.props
+  deleteDeck = deck => {
+    const { dispatch, navigation } = this.props
     return removeDeckStorage(deck.title)
-      .then(() => dispatch(removeDeck(deck.title)))
-      .then(() => navigation.navigate('DeckList'))
+      .then(() => {
+        dispatch(removeDeck(deck.title))
+        navigation.navigate('DeckList')
+      })
       .catch((error) => console.warn('Error', error))
   }
 
@@ -54,7 +56,7 @@ class Deck extends Component {
             <Text style={styles.secondaryBtnText}>Add Card</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.buttons} onPress={this.handleDelete}>
+        <TouchableOpacity style={styles.buttons} onPress={() => this.deleteDeck(deck)}>
           <Text style={styles.buttomText}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(decks, { navigation }) {
 
-  const deck = decks[navigation.state.params.deck.title]
+  let deck = decks[navigation.state.params.deck.title]
 
   if (deck === undefined) {
     deck = {

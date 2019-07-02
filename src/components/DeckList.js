@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-nati
 import { getDecks } from '../utils/fakeApi'
 import { receiveDecks } from '../redux/actions'
 import { grey_darken_1, white, amber_darken_3 } from '../utils/colors'
+import { withNavigation } from 'react-navigation'
 
 class DeckList extends Component {
 
@@ -87,11 +88,10 @@ const styles = StyleSheet.create({
 	}
 })
 
-function mapStateToProps(decks, { title }) {
+function mapStateToProps(decks) {
 	return {
-		decks: Object.values(decks),
-		deck: decks[title]
+		decks: Object.values(decks)
 	}
 }
 
-export default connect(mapStateToProps)(DeckList)
+export default  withNavigation(connect(mapStateToProps)(DeckList))
