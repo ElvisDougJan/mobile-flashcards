@@ -1,126 +1,117 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { black, gray, blue, white, amber_darken_3 } from "../utils/colors";
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { black, gray, blue, white, amber_darken_3 } from '../utils/colors'
+import { connect } from 'react-redux'
 import {
   clearLocalNotification,
   setLocalNotification
-} from "../utils/helpers";
+} from '../utils/helpers'
 
 class Quiz extends Component {
   state = {
     currentIndex: 0,
     correctAnswers: 0,
-    showAnswer: false,
+    showAnswer: false
   }
 
-  flipCard = () => {
-    this.setState({ showAnswer: !this.state.showAnswer });
-  }
+  flipCard = () => this.setState({ showAnswer: !this.state.showAnswer })
 
-  answerCorrect = () => {
+  answerCorrect = () =>
     this.setState({
       currentIndex: this.state.currentIndex + 1,
       correctAnswers: this.state.correctAnswers + 1,
-      showAnswer: false,
+      showAnswer: false
     })
-  }
 
-  answerIncorrect = () => {
+  answerIncorrect = () =>
     this.setState({
       currentIndex: this.state.currentIndex + 1,
-      showAnswer: false,
+      showAnswer: false
     })
-  }
 
-  backtoDeck = () => {
-    this.props.navigation.goBack()
-  }
+  returnToDeck = () => this.props.navigation.goBack()
 
   startQuiz = () => {
     this.setState({
       currentIndex: 0,
       correctAnswers: 0,
-      showAnswer: false,
+      showAnswer: false
     })
   }
 
-  renderSummary = (correctAnswers, totalCards) => {
+  componentDidMount() {
     clearLocalNotification()
       .then(setLocalNotification)
-    return (
-      <View>
-        <View>
-          <Text style={styles.textSummary}>{`Your Scores: ${correctAnswers} / ${totalCards}`}</Text>
-        </View>
-        <View style={styles.actions}>
-          <TouchableOpacity style={styles.primaryBtn} onPress={this.backtoDeck}>
-            <Text style={styles.primaryBtnText}>Back To Deck</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.secondaryBtn} onPress={this.startQuiz}>
-            <Text style={styles.secondaryBtnText}>Restart Quiz</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  renderCard = (currentIndex, showingCard, showAnswer, totalCards) => {
-    return (
-      <View>
-        <View>
-          <Text style={styles.textProgress}>{`Showing ${currentIndex + 1} / ${totalCards}`}</Text>
-        </View>
-        <View>
-          {
-            showAnswer === false
-              ? <Text style={styles.textCard}>{showingCard.question}</Text>
-              : <Text style={styles.textCard}>{showingCard.answer}</Text>
-          }
-        </View>
-        <View>
-          {showAnswer === false
-            ? <TouchableOpacity onPress={this.flipCard}>
-              <Text style={styles.showButton}>
-                Show Answer
-              </Text>
-            </TouchableOpacity>
-            : <TouchableOpacity onPress={this.flipCard}>
-              <Text style={styles.showButton}>
-                Show Question
-              </Text>
-            </TouchableOpacity>
-          }
-        </View>
-        <View style={styles.actions}>
-          <TouchableOpacity style={styles.primaryBtn} onPress={this.answerCorrect}>
-            <Text style={styles.primaryBtnText}>Correct</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.secondaryBtn} onPress={this.answerIncorrect}>
-            <Text style={styles.secondaryBtnText}>Incorrect</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
   }
 
   render() {
-    const { deck } = this.props.navigation.state.params;
-    const { currentIndex, correctAnswers, showAnswer } = this.state;
+    const { deck } = this.props.navigation.state.params
+    const { currentIndex, correctAnswers, showAnswer } = this.state
 
-    const cards = this.props.decks[deck.title].questions;
-    const totalCards = deck.questions.length;
-    const showingCard = cards[currentIndex];
-    const cardRemaining = currentIndex < totalCards;
+    const cards = this.props.decks[deck.title].questions
+    const totalCards = deck.questions.length
+    const showingCard = cards[currentIndex]
+    const cardRemaining = currentIndex < totalCards
 
     return (
       <View style={styles.container}>
         {cardRemaining
-          ? this.renderCard(currentIndex, showingCard, showAnswer, totalCards)
-          : this.renderSummary(correctAnswers, totalCards)
+          ?
+          (
+            <View>
+              <View>
+                <Text style={styles.textProgress}>{`Showing ${currentIndex + 1} / ${totalCards}`}</Text>
+              </View>
+              <View>
+                {
+                  showAnswer === false
+                    ? <Text style={styles.textCard}>{showingCard.question}</Text>
+                    : <Text style={styles.textCard}>{showingCard.answer}</Text>
+                }
+              </View>
+              <View>
+                {showAnswer === false
+                  ? <TouchableOpacity onPress={this.flipCard}>
+                    <Text style={styles.showButton}>
+                      Show Answer
+                    </Text>
+                  </TouchableOpacity>
+                  : <TouchableOpacity onPress={this.flipCard}>
+                    <Text style={styles.showButton}>
+                      Show Question
+                    </Text>
+                  </TouchableOpacity>
+                }
+              </View>
+              <View style={styles.actions}>
+                <TouchableOpacity style={styles.primaryBtn} onPress={this.answerCorrect}>
+                  <Text style={styles.primaryBtnText}>Correct</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.secondaryBtn} onPress={this.answerIncorrect}>
+                  <Text style={styles.secondaryBtnText}>Incorrect</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )
+          :
+          (
+            <View>
+              <View>
+                <Text style={styles.textSummary}>{`Your Scores: ${correctAnswers} / ${totalCards}`}</Text>
+              </View>
+              <View style={styles.actions}>
+                <TouchableOpacity style={styles.primaryBtn} onPress={this.returnToDeck}>
+                  <Text style={styles.primaryBtnText}>Back To Deck</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.secondaryBtn} onPress={this.startQuiz}>
+                  <Text style={styles.secondaryBtnText}>Restart Quiz</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )
         }
       </View>
-    );
+    )
   }
 }
 
@@ -146,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 15,
     marginTop: 15,
-    width: 220,
+    width: 220
   },
   secondaryBtn: {
     backgroundColor: white,
@@ -155,27 +146,27 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 15,
     marginTop: 15,
-    width: 220,
+    width: 220
   },
   primaryBtnText: {
     fontSize: 18,
     color: white,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   secondaryBtnText: {
     fontSize: 18,
     color: blue,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   textCard: {
     fontSize: 30,
     color: black,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   textProgress: {
     fontSize: 14,
     color: gray,
-    marginBottom: 30,
+    marginBottom: 30
   },
   textSummary: {
     fontSize: 30,
@@ -196,4 +187,4 @@ function mapStateToProps(decks) {
   }
 }
 
-export default connect(mapStateToProps)(Quiz);
+export default connect(mapStateToProps)(Quiz)

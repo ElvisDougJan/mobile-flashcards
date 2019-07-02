@@ -1,13 +1,13 @@
-import { ADD_DECK, RECEIVE_DECKS, ADD_NEW_CARD, REMOVE_DECK } from '../actions/index';
+import * as types from './actionsTypes'
 
 function decks(state = {}, action) {
 	switch (action.type) {
-		case RECEIVE_DECKS:
+		case types.RECEIVE_DECKS:
 			return {
 				...state,
 				...action.decks
 			}
-		case ADD_DECK:
+		case types.ADD_DECK:
 			return {
 				...state,
 				[action.title]: {
@@ -15,13 +15,13 @@ function decks(state = {}, action) {
 					questions: []
 				},
 		}
-		case REMOVE_DECK:
+		case types.REMOVE_DECK:
 			newState = {
 				...state
 			}
 			delete newState[action.title];
 			return newState;
-		case ADD_NEW_CARD:
+		case types.ADD_NEW_CARD:
 			return {
 				...state,
 				[action.title] : {

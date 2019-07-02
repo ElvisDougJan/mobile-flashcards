@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { connect } from 'react-redux';
-import { black, gray, blue, white, grey_darken_1, amber_darken_3 } from "../utils/colors";
-import { addDeck } from '../redux/actions/index';
-import { createNewDeck } from '../utils/fakeApi';
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native'
+import { TextInput } from 'react-native-gesture-handler'
+import { connect } from 'react-redux'
+import { black, gray, blue, white, grey_darken_1, amber_darken_3 } from '../utils/colors'
+import { addDeck } from '../redux/actions'
+import { createNewDeck } from '../utils/fakeApi'
 
 class NewDeck extends Component {
 	state = {
@@ -12,7 +12,7 @@ class NewDeck extends Component {
 	}
 
 	saveNewDeck = () => {
-		const { dispatch, navigation } = this.props;
+		const { dispatch, navigation } = this.props
 
 		if (!this.state.textInput) {
 			Alert.alert("The deck title can't be empty")
@@ -52,7 +52,7 @@ class NewDeck extends Component {
 					</TouchableOpacity>
 				</View>
 			</View>
-		);
+		)
 	}
 }
 
@@ -106,4 +106,4 @@ function mapStateToProps(decks) {
 		decks
 	}
 }
-export default connect(mapStateToProps)(NewDeck);
+export default connect(mapStateToProps)(NewDeck)

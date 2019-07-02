@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native'
 
 export const DECK_STORAGE_KEY = 'DECK_STORAGE_KEY'
 
@@ -60,8 +60,8 @@ export function removeDeckStorage(title) {
 export function addCardToDeck(title, card) {
   return getDecks()
     .then((results) => {
-      results[title].questions.push(card);
-      AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(results));
-    });
+      results[title].questions.push(card)
+      AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(results))
+    })
 }
 

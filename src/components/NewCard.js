@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { black, gray, white, amber_darken_3 } from "../utils/colors";
-import { connect } from 'react-redux';
-import { addNewCard } from '../redux/actions/index';
-import { addCardToDeck } from '../utils/fakeApi';
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native'
+import { TextInput } from 'react-native-gesture-handler'
+import { black, gray, white, amber_darken_3 } from '../utils/colors'
+import { connect } from 'react-redux'
+import { addNewCard } from '../redux/actions'
+import { addCardToDeck } from '../utils/fakeApi'
 
 class NewCard extends Component {
   state = {
@@ -12,27 +12,23 @@ class NewCard extends Component {
     answerText: null,
   }
 
-  handleSubmit = () => {
+  createNewCard = () => {
+    const { questionText, answerText } = this.state
+    const { dispatch, navigation } = this.props
+    const { deck } = navigation.state.params
 
-    const { questionText, answerText } = this.state;
-    const { dispatch, navigation } = this.props;
-    const { deck } = navigation.state.params;
-
-    const title = deck.title;
+    const title = deck.title
     const card = {
       question: questionText,
       answer: answerText
     }
 
-    if (questionText === null || answerText === null) {
-      Alert.alert("The question and answer cannot be empty")
-      return
-    } else {
-      return addCardToDeck(title, card)
+    !questionText || !answerText
+      ? Alert.alert('The question and answer cannot be empty')
+      : addCardToDeck(title, card)
         .then(() => dispatch(addNewCard(title, card)))
         .then(() => this.props.navigation.navigate('Deck', { deck }))
         .catch((error) => console.warn('Error', error))
-    }
   }
 
 
@@ -55,12 +51,12 @@ class NewCard extends Component {
             placeholder='Answer'
             onChangeText={(answerText) => this.setState({ answerText })}
           />
-          <TouchableOpacity style={styles.buttonNewCard} onPress={this.handleSubmit}>
+          <TouchableOpacity style={styles.buttonNewCard} onPress={this.createNewCard}>
             <Text style={styles.textButton}>Create New Card</Text>
           </TouchableOpacity>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -69,15 +65,15 @@ styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     marginTop: 20,
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   textTitle: {
     fontSize: 32,
     color: black,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   form: {
-    marginTop: 10,
+    marginTop: 10
   },
   textInput: {
     borderBottomWidth: 1,
@@ -92,7 +88,7 @@ styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 10,
-      height: 2,
+      height: 2
     },
     shadowRadius: 3.84,
     elevation: 15,
@@ -106,8 +102,8 @@ styles = StyleSheet.create({
   textButton: {
     fontSize: 18,
     color: amber_darken_3,
-    textAlign: 'center',
+    textAlign: 'center'
   }
 })
 
-export default connect()(NewCard);
+export default connect()(NewCard)

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
-import { connect } from 'react-redux';
-import { black, blue, white, grey_darken_1, deep_orange_lighten_1, green_darken_1 } from "../utils/colors";
-import { removeDeck } from '../redux/actions/index';
-import { removeDeckStorage } from '../utils/fakeApi';
+import React, { Component } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native'
+import { connect } from 'react-redux'
+import { black, blue, white, grey_darken_1, deep_orange_lighten_1, green_darken_1 } from '../utils/colors'
+import { removeDeck } from '../redux/actions'
+import { removeDeckStorage } from '../utils/fakeApi'
 
 class Deck extends Component {
 
   handleDelete = () => {
-    const { deck, dispatch, navigation } = this.props;
+    const { deck, dispatch, navigation } = this.props
     return removeDeckStorage(deck.title)
       .then(() => dispatch(removeDeck(deck.title)))
       .then(() => navigation.navigate('DeckList'))
@@ -16,7 +16,7 @@ class Deck extends Component {
   }
 
   startQuiz = () => {
-    const { deck, cardCount, navigation } = this.props;
+    const { deck, cardCount, navigation } = this.props
     if (cardCount <= 0) {
       Alert.alert('This quiz has no cards!')
       return false
@@ -32,7 +32,7 @@ class Deck extends Component {
   }
 
   render() {
-    const { deck, cardCount, navigation } = this.props;
+    const { deck, cardCount, navigation } = this.props
     return (
       <View style={styles.container}>
         <View>
@@ -58,7 +58,7 @@ class Deck extends Component {
           <Text style={styles.buttomText}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     padding: 15,
     marginTop: 15,
-    width: 220,
+    width: 220
   },
   secondaryBtn: {
     backgroundColor: white,
@@ -105,19 +105,19 @@ const styles = StyleSheet.create({
   primaryBtnText: {
     fontSize: 18,
     color: blue,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   secondaryBtnText: {
     fontSize: 18,
     color: green_darken_1,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   buttons: {
     backgroundColor: white,
     shadowColor: '#000',
     shadowOffset: {
       width: 10,
-      height: 2,
+      height: 2
     },
     shadowRadius: 3.84,
     elevation: 15,
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(decks, { navigation }) {
 
-  let deck = decks[navigation.state.params.deck.title]
+  const deck = decks[navigation.state.params.deck.title]
 
   if (deck === undefined) {
     deck = {
@@ -152,4 +152,4 @@ function mapStateToProps(decks, { navigation }) {
   }
 }
 
-export default connect(mapStateToProps)(Deck);
+export default connect(mapStateToProps)(Deck)
