@@ -51,7 +51,7 @@ class NewCard extends Component {
             placeholder='Answer'
             onChangeText={(answerText) => this.setState({ answerText })}
           />
-          <TouchableOpacity style={styles.buttonNewCard} onPress={this.createNewCard}>
+          <TouchableOpacity style={styles.buttonNew} onPress={this.createNewCard}>
             <Text style={styles.textButton}>Create New Card</Text>
           </TouchableOpacity>
         </View>
@@ -83,7 +83,7 @@ styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontSize: 18
   },
-  buttonNewCard: {
+  buttonNew: {
     backgroundColor: white,
     shadowColor: '#000',
     shadowOffset: {

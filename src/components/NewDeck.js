@@ -47,8 +47,8 @@ class NewDeck extends Component {
 						onChangeText={textInput => this.setState({ textInput })}
 						value={this.state.textInput}
 					/>
-					<TouchableOpacity style={styles.buttonNewCard} onPress={this.saveNewDeck}>
-						<Text style={styles.textButtonNewDeck}>Save New Deck</Text>
+					<TouchableOpacity style={styles.buttonNew} onPress={this.saveNewDeck}>
+						<Text style={styles.textButton}>Save New Deck</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -79,7 +79,7 @@ styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		fontSize: 18
 	},
-	buttonNewCard: {
+	buttonNew: {
 		backgroundColor: white,
 		shadowColor: '#000',
 		shadowOffset: {
@@ -95,7 +95,7 @@ styles = StyleSheet.create({
 		width: 220,
 		alignSelf: 'center'
 	},
-	textButtonNewDeck: {
+	textButton: {
 		textAlign: 'center',
 		color: amber_darken_3
 	}

@@ -84,10 +84,10 @@ class Quiz extends Component {
                 }
               </View>
               <View style={styles.actions}>
-                <TouchableOpacity style={styles.primaryBtn} onPress={this.answerCorrect}>
+                <TouchableOpacity style={styles.button} onPress={this.answerCorrect}>
                   <Text style={styles.primaryBtnText}>Correct</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.secondaryBtn} onPress={this.answerIncorrect}>
+                <TouchableOpacity style={styles.button} onPress={this.answerIncorrect}>
                   <Text style={styles.secondaryBtnText}>Incorrect</Text>
                 </TouchableOpacity>
               </View>
@@ -100,10 +100,10 @@ class Quiz extends Component {
                 <Text style={styles.textSummary}>{`Your Scores: ${correctAnswers} / ${totalCards}`}</Text>
               </View>
               <View style={styles.actions}>
-                <TouchableOpacity style={styles.primaryBtn} onPress={this.returnToDeck}>
+                <TouchableOpacity style={styles.button} onPress={this.returnToDeck}>
                   <Text style={styles.primaryBtnText}>Back To Deck</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.secondaryBtn} onPress={this.startQuiz}>
+                <TouchableOpacity style={styles.button} onPress={this.startQuiz}>
                   <Text style={styles.secondaryBtnText}>Restart Quiz</Text>
                 </TouchableOpacity>
               </View>
@@ -132,30 +132,30 @@ const styles = StyleSheet.create({
     marginTop: 80,
     alignItems: 'center'
   },
-  primaryBtn: {
-    backgroundColor: blue,
-    borderRadius: 6,
-    padding: 15,
-    marginTop: 15,
-    width: 220
-  },
-  secondaryBtn: {
+  button: {
     backgroundColor: white,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 10,
+      height: 2
+    },
+    shadowRadius: 3.84,
+    elevation: 15,
+    shadowOpacity: 0.5,
     borderRadius: 6,
-    borderColor: blue,
-    borderWidth: 1,
     padding: 15,
-    marginTop: 15,
-    width: 220
+    marginTop: 40,
+    width: 220,
+    alignSelf: 'center'
   },
   primaryBtnText: {
     fontSize: 18,
-    color: white,
+    color: blue,
     textAlign: 'center'
   },
   secondaryBtnText: {
     fontSize: 18,
-    color: blue,
+    color: amber_darken_3,
     textAlign: 'center'
   },
   textCard: {

@@ -45,7 +45,7 @@ class Deck extends Component {
           <TouchableOpacity
             style={styles.buttons}
             onPress={this.startQuiz}>
-            <Text style={styles.primaryBtnText}>Start Quiz</Text>
+            <Text style={styles.btnStartQuiz}>Start Quiz</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttons}
@@ -53,7 +53,7 @@ class Deck extends Component {
               'NewCard',
               { deck }
             )}>
-            <Text style={styles.secondaryBtnText}>Add Card</Text>
+            <Text style={styles.btnAddCard}>Add Card</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.buttons} onPress={() => this.deleteDeck(deck)}>
@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
     marginTop: 15,
     width: 220,
   },
-  primaryBtnText: {
+  btnStartQuiz: {
     fontSize: 18,
     color: blue,
     textAlign: 'center'
   },
-  secondaryBtnText: {
+  btnAddCard: {
     fontSize: 18,
     color: green_darken_1,
     textAlign: 'center'
