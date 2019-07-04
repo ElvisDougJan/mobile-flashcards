@@ -14,6 +14,8 @@ class Quiz extends Component {
     showAnswer: false
   }
 
+  cardRemaining = false
+
   flipCard = () => this.setState({ showAnswer: !this.state.showAnswer })
 
   answerCorrect = () =>
@@ -22,6 +24,13 @@ class Quiz extends Component {
       correctAnswers: this.state.correctAnswers + 1,
       showAnswer: false
     })
+
+  componentDidUpdate() {
+    if (!this.cardRemaining) {
+      clearLocalNotification()
+        .then(setLocalNotification)
+    }
+  }
 
   answerIncorrect = () =>
     this.setState({
@@ -39,11 +48,6 @@ class Quiz extends Component {
     })
   }
 
-  componentDidMount() {
-    clearLocalNotification()
-      .then(setLocalNotification)
-  }
-
   render() {
     const { deck } = this.props.navigation.state.params
     const { currentIndex, correctAnswers, showAnswer } = this.state
@@ -51,11 +55,11 @@ class Quiz extends Component {
     const cards = this.props.decks[deck.title].questions
     const totalCards = deck.questions.length
     const showingCard = cards[currentIndex]
-    const cardRemaining = currentIndex < totalCards
+    this.cardRemaining = currentIndex < totalCards
 
     return (
       <View style={styles.container}>
-        {cardRemaining
+        {this.cardRemaining
           ?
           (
             <View>

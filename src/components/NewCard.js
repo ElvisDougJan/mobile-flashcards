@@ -8,8 +8,8 @@ import { addCardToDeck } from '../utils/fakeApi'
 
 class NewCard extends Component {
   state = {
-    questionText: null,
-    answerText: null,
+    questionText: '',
+    answerText: '',
   }
 
   createNewCard = () => {
@@ -19,11 +19,24 @@ class NewCard extends Component {
 
     const title = deck.title
     const card = {
-      question: questionText,
-      answer: answerText
+      question: questionText.trim(),
+      answer: answerText.trim()
     }
 
-    !questionText || !answerText
+    const verifyWhiteSpaces = () => {
+      const questionToArray = Array.from(questionText)
+      const answerTextToArray = Array.from(answerText)
+
+      if (questionToArray.every(item => item === ' ')
+        || answerTextToArray.every(item => item === ' ')) {
+        return true
+      } else {
+        return false
+      }
+    }
+
+
+    !questionText || !answerText || verifyWhiteSpaces()
       ? Alert.alert('The question and answer cannot be empty')
       : addCardToDeck(title, card)
         .then(() => dispatch(addNewCard(title, card)))
